@@ -79,3 +79,14 @@ found.
 
 The last parameter you can use is `--backward`. Instead of adding to the counter the tool
 will decrease it. The same thing happens with the epoch counter.
+
+## Improvements
+
+This tool should work on simple MongoDB installations, where no clusters are used (machine
+identifier remains constant) and the MongoDB hasn't been restarted (process ID remains
+constant).
+
+For other scenarios prediction is still possible, but requires more requests and potentially
+[a different algorithm](https://github.com/andresriancho/mongo-objectid-predict/issues/1)
+which receives more samples, analyzes them and then starts producing ObjectIds for that
+specific installation. 
