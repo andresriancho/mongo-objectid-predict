@@ -27,7 +27,7 @@ def predict(base, backward=False, counter_diff=20, per_counter=60):
     base = ObjectId(base)
     oper = {False: operator.add, True: operator.sub}.get(backward)
 
-    for counter_iter in xrange(counter_diff):
+    for counter_iter in xrange(1, counter_diff):
         for epoch_iter in xrange(per_counter):
             copy = base.copy()
 
