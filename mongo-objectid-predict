@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+
+import argparse
+import sys
+
+from mongo_objectid_predict import predict
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(prog='mongo-objectid-predict')
+    parser.add_argument('objectid', help='The base Mongo ObjectId')
+    parser.add_argument('--backward', action='store_true', help='Predict past values', default=False)
+    parser.add_argument('--counter-diff', type=int, help='Counter iterations', default=20)
+    parser.add_argument('--per-counter', type=int, help='Epoch time skew for each counter iteration', default=60)
+    return parser.parse_args()
+
+
+def main(args):
+    try:
+        for objectid in predict(base=args.objectid,
+                                backward=args.backward,
+                                counter_diff=args.counter_diff,
+                                per_counter=args.per_counter):
+            print(objectid)
+    except Exception, e:
+        print(e)
+        sys.exit(1)
+
+
+if __name__ == '__main__':
+    args = parse_args()
+    main(args)
